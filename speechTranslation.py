@@ -1,7 +1,8 @@
-import random
-import time
-
 import speech_recognition as sr
+# Imports the Google Cloud client library
+from google.cloud import translate
+
+GOOGLE_APPLICATION_CREDENTIALS="/Users/christine/GitHub/Speech-Translation/Speech\ Translation-d28a5487c277.json"
 
 def recognize_speech_from_mic(recognizer, microphone):
     """Transcribe speech from recorded from `microphone`.
@@ -52,67 +53,37 @@ def recognize_speech_from_mic(recognizer, microphone):
 
 
 if __name__ == "__main__":
-    # set the list of words, maxnumber of guesses, and prompt limit
-    WORDS = ["apple", "banana", "grape", "orange", "mango", "lemon"]
-    NUM_GUESSES = 3
     PROMPT_LIMIT = 5
 
     # create recognizer and mic instances
     recognizer = sr.Recognizer()
     microphone = sr.Microphone()
 
-    # get a random word from the list
-    word = random.choice(WORDS)
 
-    # format the instructions string
-    instructions = (
-        "I'm thinking of one of these words:\n"
-        "{words}\n"
-        "You have {n} tries to guess which one.\n"
-    ).format(words=', '.join(WORDS), n=NUM_GUESSES)
-
-    # show instructions and wait 3 seconds before starting the game
-    print(instructions)
-    time.sleep(3)
-
-    for i in range(NUM_GUESSES):
-        # get the guess from the user
-        # if a transcription is returned, break out of the loop and
-        #     continue
-        # if no transcription returned and API request failed, break
-        #     loop and continue
-        # if API request succeeded but no transcription was returned,
-        #     re-prompt the user to say their guess again. Do this up
-        #     to PROMPT_LIMIT times
-        for j in range(PROMPT_LIMIT):
-            print('Guess {}. Speak!'.format(i + 1))
-            guess = recognize_speech_from_mic(recognizer, microphone)
-            if guess["transcription"]:
-                break
-            if not guess["success"]:
-                break
-            print("I didn't catch that. What did you say?\n")
-
-        # if there was an error, stop the game
-        if guess["error"]:
-            print("ERROR: {}".format(guess["error"]))
+    for i in range(PROMPT_LIMIT):
+        print('Speak!'.format(i + 1))
+        response = recognize_speech_from_mic(recognizer, microphone)
+        if response["transcription"]:
             break
-
-        # show the user the transcription
-        print("You said: {}".format(guess["transcription"]))
-
-        # determine if guess is correct and if any attempts remain
-        guess_is_correct = guess["transcription"].lower() == word.lower()
-        user_has_more_attempts = i < NUM_GUESSES - 1
-
-        # determine if the user has won the game
-        # if not, repeat the loop if user has more attempts
-        # if no attempts left, the user loses the game
-        if guess_is_correct:
-            print("Correct! You win!".format(word))
+        if not response["success"]:
             break
-        elif user_has_more_attempts:
-            print("Incorrect. Try again.\n")
-        else:
-            print("Sorry, you lose!\nI was thinking of '{}'.".format(word))
-            break
+        print("I didn't catch that. What did you say?\n")
+    # if there was an error, stop the game
+    if response["error"]:
+        print("ERROR: {}".format(response["error"]))
+        # break
+
+    print("You said: {}".format(response["transcription"]))
+
+    # Instantiates a client
+    translate_client = translate.Client()
+
+    # The target language
+    target = 'ja'
+
+    # Translates some text into Russian
+    translation = translate_client.translate(
+        response["transcription"],
+        target_language=target)
+
+    print(u'Translation: {}'.format(translation['translatedText']))
