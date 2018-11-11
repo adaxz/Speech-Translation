@@ -2,8 +2,6 @@ import speech_recognition as sr
 # Imports the Google Cloud client library
 from google.cloud import translate
 
-GOOGLE_APPLICATION_CREDENTIALS="/Users/christine/GitHub/Speech-Translation/Speech\ Translation-d28a5487c277.json"
-
 def recognize_speech_from_mic(recognizer, microphone):
     """Transcribe speech from recorded from `microphone`.
 
