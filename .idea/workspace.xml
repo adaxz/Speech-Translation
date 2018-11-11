@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="622c7aee-9d68-4ce4-b612-55cd8a8f0a4f" name="Default" comment="Added base file">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/guessTheWord.py" afterPath="$PROJECT_DIR$/speechTranslation.py" />
-    </list>
+    <list default="true" id="622c7aee-9d68-4ce4-b612-55cd8a8f0a4f" name="Default" comment="Added base file" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +14,8 @@
       <file leaf-file-name="speechTranslation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/speechTranslation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="92" column="21" lean-forward="true" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+            <state relative-caret-position="195">
+              <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -48,6 +46,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/guessTheWord.py" />
+        <option value="$PROJECT_DIR$/speechTranslation.py" />
       </list>
     </option>
   </component>
@@ -225,8 +224,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/speechTranslation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="21" lean-forward="true" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+        <state relative-caret-position="195">
+          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
