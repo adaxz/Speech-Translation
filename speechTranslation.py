@@ -7,7 +7,7 @@ from gtts import gTTS
 # This module is imported so that we can
 # play the converted audio
 import subprocess
-
+from datetime import datetime
 
 def recognize_speech_from_mic(recognizer, microphone, lang):
     """Transcribe speech from recorded from `microphone`.
@@ -59,18 +59,18 @@ def recognize_speech_from_mic(recognizer, microphone, lang):
 
 if __name__ == "__main__":
     PROMPT_LIMIT = 5
-
     # create recognizer and mic instances
     recognizer = sr.Recognizer()
     microphone = sr.Microphone()
 
     # Language in which you want to convert
-    src = 'zh-CN'
+    src = 'en'
 
     for i in range(PROMPT_LIMIT):
         print('Speak!'.format(i + 1))
         response = recognize_speech_from_mic(recognizer, microphone, src)
         if response["transcription"]:
+            a = datetime.now()
             break
         if not response["success"]:
             break
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     # Instantiates a client
     translate_client = translate.Client()
 
-    des = 'ja'
+    des = 'zh-CN'
 
     # Translates some text into Russian
     translation = translate_client.translate(
@@ -108,4 +108,11 @@ if __name__ == "__main__":
     myobj.save("audio.mp3")
 
     audio = "audio.mp3"
+    # wait a bit
+    b = datetime.now()
+
+    d = b - a  # yields a timedelta object
+
+    # total = t1 - t0
     subprocess.call(["afplay", audio])
+    print(d)
